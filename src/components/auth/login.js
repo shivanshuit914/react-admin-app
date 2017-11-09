@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import {loginUser} from '../../actions/auth';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
 
@@ -35,7 +36,7 @@ class Login extends Component {
             );
         }
         if (this.props.authenticated) {
-            this.props.history.push('/dashboard');
+            return <Redirect to='/dashboard'/>;
         }
     }
 

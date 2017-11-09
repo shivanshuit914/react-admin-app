@@ -8,8 +8,8 @@ class Logout extends Component {
     }
 
     render() {
-        return <div>Sorry to see you go...</div>;
+        return <div>Successfully logged out.</div>;
     }
 }
 
-export default connect(null, logoutUser)(Logout);
+export default connect(null, {logoutUser})(Logout);
