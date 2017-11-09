@@ -19,6 +19,20 @@ export function loginUser({ email, password }) {
     }
 }
 
+export function registerUser({email, password}) {
+    return function (dispatch) {
+        axios.post(`${ROOT_URL}/users/`, {email, password})
+            .then(
+                response => {
+                    dispatch({type: AUTH_USER});
+                    localStorage.setItem('token', response.data.token);
+                }
+            ).catch(response => {
+            dispatch(authError(response.data.error));
+        })
+    }
+}
+
 export function logoutUser() {
     localStorage.removeItem('token');
 

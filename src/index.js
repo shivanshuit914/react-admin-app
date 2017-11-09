@@ -13,6 +13,7 @@ import {
     Switch
   } from 'react-router-dom';
 import Login from './components/auth/login';
+import Register from './components/auth/register';
 import Logout from './components/auth/logout';
 import Dashboard from './components/dashboard';
 import App from './components/app';
@@ -36,6 +37,7 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route exact path="/" component={Login}/>
+                    <Route path="/register" component={Register}/>
                     <Route path="/logout" component={Logout}/>
                     <Route path="/dashboard" component={Authenticate(Dashboard)}/>
                 </Switch>

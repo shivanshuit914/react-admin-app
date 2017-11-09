@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import {loginUser} from '../../actions/auth';
+import {registerUser} from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
 
-class Login extends Component {
 
+class Register extends Component {
     renderField(field) {
 
         const { meta: { touched, error } } = field;
@@ -23,10 +23,6 @@ class Login extends Component {
         );
     }
 
-    onSubmit({email, password}) {
-        this.props.loginUser({ email, password });
-    }
-
     renderAlert() {
         if (this.props.errorMessage) {
             return (
@@ -38,6 +34,10 @@ class Login extends Component {
         if (this.props.authenticated) {
             return <Redirect to='/dashboard'/>;
         }
+    }
+
+    onSubmit({email, password}) {
+        this.props.registerUser({ email, password });
     }
 
     render() {
@@ -56,9 +56,15 @@ class Login extends Component {
                     type="password"
                     component={this.renderField}
                 />
+                <Field
+                    label="Confirm Password"
+                    name="confirm_password"
+                    type="password"
+                    component={this.renderField}
+                />
                 <br/>
                 {this.renderAlert()}
-                <button type="submit" className="btn btn-primary" > Login </button>
+                <button type="submit" className="btn btn-primary" > Register </button>
             </form>
         );
     }
@@ -68,11 +74,19 @@ const validate = (values) => {
     const errors = {};
 
     if (!values.email) {
-        errors.title = "Enter an Email";
+        errors.email = "Enter an Email";
     }
 
     if (!values.password) {
         errors.password = "Enter a password";
+    }
+
+    if (!values.confirm_password) {
+        errors.confirm_password = "Enter a password";
+    }
+
+    if (values.password !== values.confirm_password) {
+        errors.confirm_password = "Enter confirm password same as password";
     }
 
     return errors;
@@ -84,7 +98,7 @@ function mapStateToProps(state) {
 
 export default reduxForm({
     validate,
-    form: 'LoginForm'
+    form: 'RegisterForm'
 })(
-    connect(mapStateToProps, {loginUser})(Login)
+    connect(mapStateToProps, {registerUser})(Register)
 );
