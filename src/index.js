@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reduxThunk from 'redux-thunk';
+import promise from 'redux-promise';
 
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css'
@@ -21,7 +22,7 @@ import reducers from './reducers/';
 import Authenticate from './components/auth/authenticate';
 import {AUTH_USER} from './actions/auth';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('token');

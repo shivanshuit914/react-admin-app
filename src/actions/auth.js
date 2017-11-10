@@ -3,7 +3,7 @@ import axios from 'axios';
 export const AUTH_USER = 'auth_user';
 export const AUTH_ERROR = 'auth_error';
 export const LOGOUT_USER = 'sign_out_user';
-const ROOT_URL = 'http://localhost:3000';
+export const ROOT_URL = 'http://localhost:3000';
 
 export function loginUser({ email, password }) {
     return function (dispatch) {
